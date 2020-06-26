@@ -1,0 +1,62 @@
+﻿@model IEnumerable<repaso_parcial.Models.Articulo>
+
+@{
+    ViewBag.Title = ViewBag.tipo;
+}
+
+<h2>@ViewBag.tipo</h2>
+
+@if (ViewBag.tipo == "Instrumentos")
+{
+    <p>
+        @Html.ActionLink("Agregar Instrumento", "AgregarInstrumento")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Lista completa", "ListaInstrumentos")
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditarInstrumento", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "BorrarInstrumento", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

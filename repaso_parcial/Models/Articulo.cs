@@ -15,9 +15,13 @@ namespace repaso_parcial.Models
         public string Descripcion { get; set; }
         [Required]
         public int Stock { get; set; }
+        public decimal Precio { get; set; }
+        [RegularExpression(@"^-?[0-9][0-9,]+$",ErrorMessage ="Número inválido.")]
         [Required]
-        public double Precio { get; set; }
+        public string PrecioString { get; set; }
         [Required]
         public int Tipo { get; set; }
+
+        // public int Active { get; set; }
     }
 }

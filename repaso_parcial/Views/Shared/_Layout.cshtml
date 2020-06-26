@@ -1,13 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+@{
+    ViewBag.tipoInstrumento = repaso_parcial.BD_Conexion.GestorBd.ObtenerListaTipos();
+}
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -17,15 +20,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Todo Instrumento", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Instrumentos","View","Articulos")</li>
+                    <li>@Html.ActionLink("Nuevo Instrumento", "AgregarInstrumento", "Articulos")</li>
+                    <li>@Html.ActionLink("Instrumentos", "ListaInstrumentos", "Articulos")</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            &#9660 Ver por tipo de instrumento
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul>
+                                @foreach (var item in ViewBag.tipoInstrumento)
+                                {
+                                    <li><a class="dropdown-item" href="@Url.Action("ListaEspecifica", "Articulos", new { tipo = item.Tipo })">@item.Tipo</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </div>
